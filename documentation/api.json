@@ -29,13 +29,13 @@
     "http"
   ],
   "paths": {
-    "/pet": {
+    "/_health": {
       "get": {
         "tags": [
-          "pet"
+          "health"
         ],
-        "summary": "get pets",
-        "description": "",
+        "summary": "get health",
+        "description": "show the health of the system",
         "operationId": "getPets",
         "consumes": [
           "application/json"
@@ -45,7 +45,7 @@
         ],
         "parameters": [
           {
-            "description": "get all pets objects",
+            "description": "get health of the systems",
             "required": true
           }
         ],
@@ -53,10 +53,11 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PetDto"
-              }
+              "available": true,
+              "uptime": true,
+              "serverId": true,
+              "hostname": true,
+              "startTime": true
             }
           },
           "500": {
@@ -74,36 +75,28 @@
     }
   },
   "definitions": {
-    "PetGet": {
+    "HealthGet": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
+        "available": {
+          "type": "booleant",
+          "example": "true"
         },
-        "name": {
+        "uptime": {
+          "type": "float",
+          "example": "836.756755033"
+        },
+        "serverId": {
           "type": "string",
-          "example": "doggie"
+          "example": "89626739-4b94-45fb-a126-78322a4a761f 22"
         },
-        "category": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "Pet": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "properties": {
-        "name": {
+        "hostname": {
           "type": "string",
-          "example": "doggie"
+          "example": "89626739-4b94-45fb-a126-78322a4a761f"
         },
-        "category": {
-          "type": "integer",
-          "format": "int32"
+        "startTime": {
+          "type": "Date",
+          "example": "2022-08-10T03:20:12.333Z"
         }
       }
     }
