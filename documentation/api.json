@@ -15,12 +15,8 @@
   },
   "tags": [
     {
-      "name": "pet",
-      "description": "Everything about your Pets"
-    },
-    {
-      "name": "user",
-      "description": "Everything about your Users"
+      "name": "health",
+      "description": "Health of the system"
     }
   ],
   "basePath": "/",
@@ -36,7 +32,7 @@
         ],
         "summary": "get health",
         "description": "show the health of the system",
-        "operationId": "getPets",
+        "operationId": "getHealth",
         "consumes": [
           "application/json"
         ],
@@ -53,11 +49,8 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "available": true,
-              "uptime": true,
-              "serverId": true,
-              "hostname": true,
-              "startTime": true
+              "type": "object",
+              "$ref": "#/definitions/healthGet"
             }
           },
           "500": {
@@ -75,11 +68,11 @@
     }
   },
   "definitions": {
-    "HealthGet": {
+    "healthGet": {
       "type": "object",
       "properties": {
         "available": {
-          "type": "booleant",
+          "type": "boolean",
           "example": "true"
         },
         "uptime": {
